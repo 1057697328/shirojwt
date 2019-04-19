@@ -1,10 +1,10 @@
 # LightWing SHIRO JWT示例
 ### Author Clarence
 ---
-##介绍
+## 介绍
 #### 此项目为长沙轻翼网络科技有限公司SpringBoot整合Shiro & JSON Web Token的项目模板。
 
-##依赖POM
+## 依赖POM
 
 ```
 
@@ -74,7 +74,7 @@
 
 ```
 
-##项目主要目录简介
+## 项目主要目录简介
 ```
 - main
     - java
