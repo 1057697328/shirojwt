@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.lightwing.shirojwt.dao.UserDao">
+    <resultMap id="userMap" type="net.lightwing.shirojwt.pojo.LUser">
+        <id property="uid" column="uid"/>
+        <result property="account" column="account"/>
+        <result property="password" column="password"/>
+        <result property="name" column="name"/>
+        <result property="rid" column="rid"/>
+        <association property="role" javaType="net.lightwing.shirojwt.pojo.LRole">
+            <id property="rid" column="rid"/>
+            <result property="rname" column="rname"/>
+        </association>
+        <collection property="permissions" ofType="net.lightwing.shirojwt.pojo.LPermission">
+            <id column="pid" property="pid"/>
+            <result property="permission" column="permission"/>
+            <result property="rid" column="rid"/>
+        </collection>
+    </resultMap>
+    <select id="getUserWithPermission" resultMap="userMap">
+        select * from
+        l_user u
+        inner join `l_userrole` ur on (ur.uid=u.uid)
+        inner join `l_role` r on (r.rid=ur.rid)
+        inner join `l_rolepermission` rp on (rp.`rid`=r.rid)
+        inner join `l_permission` p on (rp.pid=p.pid)
+        where account=#{account};
+    </select>
+
+</mapper>
